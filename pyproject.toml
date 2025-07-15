@@ -3,5 +3,6 @@ name = "srs-generator"
 version = "0.1.0"
 requires-python = ">=3.13"
 dependencies = [
+    "google-genai>=1.25.0",
     "reflex>=0.8.1",
 ]
