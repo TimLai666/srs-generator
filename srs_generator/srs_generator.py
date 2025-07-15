@@ -2,6 +2,7 @@
 
 from srs_generator.srs_map import srs_map
 from srs_generator.llm import generate_srs
+from srs_generator.render_srs import render_srs_from_llm_response
 import reflex as rx
 
 
@@ -19,8 +20,8 @@ class State(rx.State):
         os.environ['CURL_CA_BUNDLE'] = ''
         os.environ['PYTHONHTTPSVERIFY'] = '0'
         ssl._create_default_https_context = ssl._create_unverified_context
-        self.srs_result = generate_srs(
-            srs_map, self.proj_name, self.proj_requirements)
+        self.srs_result = render_srs_from_llm_response(generate_srs(
+            srs_map, self.proj_name, self.proj_requirements))
 
 
 def index() -> rx.Component:
