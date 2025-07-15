@@ -3,11 +3,6 @@
 from srs_generator.srs_map import srs_map
 from srs_generator.llm import generate_srs
 import reflex as rx
-import ssl
-import os
-os.environ['CURL_CA_BUNDLE'] = ''
-os.environ['PYTHONHTTPSVERIFY'] = '0'
-ssl._create_default_https_context = ssl._create_unverified_context
 
 
 class State(rx.State):
@@ -19,6 +14,11 @@ class State(rx.State):
 
     @rx.event
     def generate_srs(self):
+        import ssl
+        import os
+        os.environ['CURL_CA_BUNDLE'] = ''
+        os.environ['PYTHONHTTPSVERIFY'] = '0'
+        ssl._create_default_https_context = ssl._create_unverified_context
         self.srs_result = generate_srs(
             srs_map, self.proj_name, self.proj_requirements)
 
