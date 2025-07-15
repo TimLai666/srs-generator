@@ -90,9 +90,10 @@ def generate_srs(srs_map: dict, proj_name: str, proj_requirements: str) -> dict:
     欄位定義：{srs_map}
     專案名稱：{proj_name}
     專案需求：{proj_requirements}
-    你是一位專案經理，負責收集和整理專案需求。請根據以上信息生成一份完整的軟體需求規格書（SRS）。
-    請嚴格只輸出純 JSON（不能有 markdown、註解、...、多餘文字、說明、程式碼區塊、標題、換行、註腳、或任何非 JSON 格式內容）。
-    不得省略任何內容。
+    You are a project manager who is responsible for collecting and organizing project requirements. Please generate a complete Software Requirements Specification (SRS) based on the above information.
+    Please strictly output only pure JSON (no markdown, comments, ..., extra text, instructions, code blocks, headers, line breaks, footers, or any non-JSON format content).
+    Do not omit any content.
+    Strictly follow the JSON format.
     """
     response_str: str = ask_gemini(prompt)
     json_str = extract_json_from_response(response_str)

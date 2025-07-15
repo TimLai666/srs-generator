@@ -18,8 +18,6 @@
 * **前端技術：** {frontend_technologies}
 * **後端技術：** {backend_technologies}
 * **資料庫：** {database}
-* **雲端平台：** {cloud_platform}
-* **版本控制儲存庫：** {version_control_repo}
 * **其他技術/工具：** {other_technologies_tools}
 
 ---
@@ -55,7 +53,6 @@
 
 ### 5. 資料庫設計
 
-* **實體關係圖 (ERD)：** {erd_link_description}
 * **資料表清單：** {table_list_description}
 * **重要欄位定義：** {key_field_definitions}
 
@@ -63,7 +60,6 @@
 
 ### 6. API 設計
 
-* **API 文件連結：** {api_docs_link}
 * **主要 API 端點：** {main_api_endpoints_description}
 * **請求/響應範例：** {request_response_examples}
 
@@ -82,8 +78,6 @@
 
 * **部署策略：** {deployment_strategy}
 * **部署環境：** {deployment_environments_description}
-* **監控與日誌：** {monitoring_logging_description}
-* **備份與復原：** {backup_recovery_strategy}
 
 ---
 
