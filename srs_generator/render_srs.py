@@ -3,7 +3,7 @@ from typing import Dict, Any
 import re
 
 
-def render_srs_from_llm_response(llm_response: Dict[str, Any], template_path: str = None) -> str:
+def render_srs_from_llm_response(proj_name: str, llm_response: Dict[str, Any], template_path: str = None) -> str:
     """
     將 LLM 回應(dict)渲染到 SRS markdown 模板。
     :param llm_response: LLM 回傳的 dict 內容
@@ -15,6 +15,8 @@ def render_srs_from_llm_response(llm_response: Dict[str, Any], template_path: st
             os.path.dirname(__file__)), 'srs_tmpl.md')
     with open(template_path, 'r', encoding='utf-8') as f:
         template = f.read()
+
+    template = template.replace('{project_name}', proj_name)
 
     # 處理 {{optional_features}} 佔位符
     optional_features_md = ''

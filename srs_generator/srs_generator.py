@@ -4,6 +4,7 @@ from srs_generator.srs_map import srs_map
 from srs_generator.llm import generate_srs
 from srs_generator.render_srs import render_srs_from_llm_response
 import reflex as rx
+import urllib.parse
 
 
 class State(rx.State):
@@ -22,7 +23,7 @@ class State(rx.State):
         os.environ['CURL_CA_BUNDLE'] = ''
         os.environ['PYTHONHTTPSVERIFY'] = '0'
         ssl._create_default_https_context = ssl._create_unverified_context
-        self.srs_result = render_srs_from_llm_response(generate_srs(
+        self.srs_result = render_srs_from_llm_response(self.proj_name, generate_srs(
             srs_map, self.proj_name, self.proj_requirements))
         self.loading = False
 
@@ -48,15 +49,40 @@ def index() -> rx.Component:
                     rows="6",
                     mb="3"
                 ),
-                rx.button(
-                    "生成",
-                    color_scheme="blue",
-                    width="100%",
-                    on_click=State.generate_srs,
-                    is_disabled=State.loading
+                rx.cond(
+                    State.loading,
+                    rx.spinner(width="100%", thickness="4px",
+                               color="blue.500", size="3", speed="0.65s", mt="1"),
+                    rx.button(
+                        "生成",
+                        color_scheme="blue",
+                        width="100%",
+                        on_click=State.generate_srs,
+                        is_disabled=State.loading
+                    )
                 ),
                 rx.text(State.srs_result, mt="4",
                         width="100%", white_space="pre-wrap"),
+                rx.cond(
+                    State.srs_result != "",
+                    rx.link(
+                        rx.button(
+                            "下載 SRS 結果",
+                            color_scheme="teal",
+                            width="100%",
+                            mt="2"
+                        ),
+                        download=rx.cond(
+                            State.proj_name != "", State.proj_name + ".txt", "SRS.txt"),
+                        href=rx.cond(
+                            State.srs_result != "",
+                            "data:text/plain;charset=utf-8," +
+                            urllib.parse.quote(str(State.srs_result)),
+                            ""
+                        )
+                    ),
+                    None
+                ),
                 spacing="4",
                 width="100%"
             ),
