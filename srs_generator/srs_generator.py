@@ -12,9 +12,11 @@ class State(rx.State):
     proj_name: str = ""
     proj_requirements: str = ""
     srs_result: str = ""
+    loading: bool = False
 
     @rx.event
-    def generate_srs(self):
+    async def generate_srs(self):
+        self.loading = True
         import ssl
         import os
         os.environ['CURL_CA_BUNDLE'] = ''
@@ -22,6 +24,7 @@ class State(rx.State):
         ssl._create_default_https_context = ssl._create_unverified_context
         self.srs_result = render_srs_from_llm_response(generate_srs(
             srs_map, self.proj_name, self.proj_requirements))
+        self.loading = False
 
 
 def index() -> rx.Component:
@@ -49,7 +52,8 @@ def index() -> rx.Component:
                     "生成",
                     color_scheme="blue",
                     width="100%",
-                    on_click=State.generate_srs
+                    on_click=State.generate_srs,
+                    is_disabled=State.loading
                 ),
                 rx.text(State.srs_result, mt="4",
                         width="100%", white_space="pre-wrap"),

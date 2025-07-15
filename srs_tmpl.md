@@ -26,25 +26,17 @@
 
 ### 3. 功能需求
 
+
 #### 3.1 核心功能
 
-* **功能 {n} 名稱：** {feature_n_name}
-    * **描述：** {feature_n_description}
-    * **優先級：** {feature_n_priority}
-    * **相關使用者故事/用例：** {feature_n_user_stories}
+{core_features}
 
 ---
 
-#### 3.2 選擇性功能 (可依照需求增加或刪減此區塊)
 
-* **選擇性功能 A 名稱：** {optional_feature_a_name}
-    * **描述：** {optional_feature_a_description}
-    * **優先級：** {optional_feature_a_priority}
-    * **備註：** {optional_feature_a_notes}
-* **選擇性功能 B 名稱：** {optional_feature_b_name}
-    * **描述：** {optional_feature_b_description}
-    * **優先級：** {optional_feature_b_priority}
-    * **備註：** {optional_feature_b_notes}
+#### 3.2 選擇性功能
+
+{optional_features}
 
 ---
 
